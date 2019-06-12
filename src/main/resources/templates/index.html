@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <p>Bem vindo <span th:text="${nome}">Seu Nome Aqui</span>!</p>
+    <ul>
+        <li><a th:href="@{/atividade/}">Atividade</a></li>
+    </ul>
+</body>
+</html>
