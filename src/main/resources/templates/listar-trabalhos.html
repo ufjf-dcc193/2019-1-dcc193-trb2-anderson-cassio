@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Trabalhos: Listar</title>
+</head>
+<body>
+<h1>Trabalhos</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Título</th>
+<th>Descrição</th>
+<th>URL</th>
+<th>Área</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
+<td th:text="*{id}"></td>
+<td th:text="*{nome}"></td>
+<td th:text="*{descricao}"></td>
+<td th:text="*{url}"></td>
+<td th:text="*{area}"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

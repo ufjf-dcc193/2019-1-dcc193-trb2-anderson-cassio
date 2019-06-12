@@ -5,11 +5,9 @@
     <title>Atividade: Nova</title>
 </head>
 <body>
-    <form th:action="@{criar-avaliador.html}" method="post" th:object="${avaliador}">
+    <form th:action="@{criar-categoria.html}" method="post" th:object="${categoria}">
         <label>Nome: <input type="text" th:field="*{nome}"></label>
         <strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
-        <label>Email: <input type="text" th:field="*{email}"></label>
-        <strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong>
         <input type="submit" />
         <input type="reset" />
     </form>

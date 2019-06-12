@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="atividade: ${avaliador}" th:object="${avaliador}">
+            <tr th:each="avaliador: ${avaliadores}" th:object="${avaliador}">
                 <td th:text="*{id}"></td>
                 <td th:text="*{nome}"></td>
                 <td th:text="*{email}"></td>

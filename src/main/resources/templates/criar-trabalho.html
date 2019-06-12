@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Trabalho: Novo</title>
+</head>
+<body>
+<form th:action="@{criar.html}" method="post" th:object="${trabalho}">
+<label>Título: <input type="text" th:field="*{nome}"></label>
+<strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
+<label>Descrição: <input type="text" th:field="*{descricao}"></label>
+<strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
+<label>URL: <input type="text" th:field="*{url}"></label>
+<strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong>
+<label>Área: <input type="text" th:field="*{area}"></label>
+<strong th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></strong>
+<input type="submit" />
+<input type="reset" />
+</form>
+</body>
+</html>
