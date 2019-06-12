@@ -1,4 +1,4 @@
-package zzzzz.com.example.zzzz.model;
+package br.ufjf.dcc193.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
