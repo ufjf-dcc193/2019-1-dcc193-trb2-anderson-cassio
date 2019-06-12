@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Avaliador {
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
