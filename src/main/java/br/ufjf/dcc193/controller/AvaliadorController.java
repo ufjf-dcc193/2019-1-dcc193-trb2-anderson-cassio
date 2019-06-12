@@ -38,25 +38,25 @@ public class AvaliadorController {
             return mv;
     }
 
-    @PostMapping(value="/criar.html")
-    public ModelAndView criar(@Valid Avaliador Avaliador, BindingResult binding){
+    @PostMapping(value="/criar-avaliador.html")
+    public ModelAndView criar(@Valid Avaliador avaliador, BindingResult binding){
             ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
-                mv.setViewName("Avaliador-form-new");
-                mv.addObject("Avaliador", Avaliador);
+                mv.setViewName("criar-avaliador");
+                mv.addObject("avaliador", avaliador);
                 return mv;
             }
-            avaliadorRepository.save(Avaliador);
+            avaliadorRepository.save(avaliador);
             mv.setViewName("redirect:listar.html");
             return mv;
     }
 
     @GetMapping(value="/listar.html")
     public ModelAndView listar(){
-        List<Avaliador> Avaliadors = avaliadorRepository.findAll();
+        List<Avaliador> avaliadores = avaliadorRepository.findAll();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("Avaliador-list.html");
-        mv.addObject("Avaliadors", Avaliadors);
+        mv.setViewName("listar-avaliadores.html");
+        mv.addObject("avaliadores", avaliadores);
         return mv;
     }
 }
