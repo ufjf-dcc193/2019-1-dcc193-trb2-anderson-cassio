@@ -1,21 +1,102 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Trabalho: Novo</title>
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Atividade: Nova</title>
 </head>
+
 <body>
-<form th:action="@{criar.html}" method="post" th:object="${trabalho}">
-<label>Título: <input type="text" th:field="*{nome}"></label>
-<strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
-<label>Descrição: <input type="text" th:field="*{descricao}"></label>
-<strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
-<label>URL: <input type="text" th:field="*{url}"></label>
-<strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong>
-<label>Área: <input type="text" th:field="*{area}"></label>
-<strong th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></strong>
-<input type="submit" />
-<input type="reset" />
-</form>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">GERENCIAMENTO DE REVISAO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/../sedes">Ver trabalhos</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Ferramentas
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/../sedes">Ferramentas do Sistema</a>
+            <a class="dropdown-item" href="/../avaliador/criar">Cadastrar Avaliador</a>
+            <a class="dropdown-item"  href="/../trabalhos/criar">Cadastrar trabalho</a>
+            <a class="dropdown-item" href="/../categorias/criar">Cadastrar Cadastrar Categorias</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/../avaliador/listar-avaliadores.html">Ver Avaliadores</a>
+              <a class="dropdown-item" href="/../categorias/listar-categorias.html">Ver Categorias </a>
+              <a class="dropdown-item" href="/../trabalhos/listar-trabalhos.html">Ver Trabalhos</a>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
+
+  
+  <div class="album py-5 bg-light">
+        <div class="container">
+
+
+
+    <form th:action="@{criar-trabalho.html}" method="post" th:object="${trabalho}">
+        <div class="form-group">
+
+            <label>Titulo: <input type="text" class="form-control" th:field="*{titulo}"></label>
+            <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
+
+        </div>
+        <div class="form-group">
+            <label>Descricao: <input type="text" class="form-control" th:field="*{descricao}"></label>
+            <strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong>
+        </div>
+        <div class="form-group">
+            <label>URL: <input type="text" class="form-control" th:field="*{url}"></label>
+            <strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong>
+        </div>
+        
+        <div class="form-group">
+            <input class="btn btn-primary my-2" type="submit" />
+            <input  class="btn btn-primary my-2" type="reset" />
+        </div>
+    </form>
+    
+
+</div>
+</div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
+
+
+
 </html>

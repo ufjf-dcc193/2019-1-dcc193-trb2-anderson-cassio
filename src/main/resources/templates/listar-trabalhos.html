@@ -1,30 +1,95 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Trabalhos: Listar</title>
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Atividade: Nova</title>
 </head>
+
+
+
 <body>
-<h1>Trabalhos</h1>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Título</th>
-<th>Descrição</th>
-<th>URL</th>
-<th>Área</th>
-</tr>
-</thead>
-<tbody>
-<tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
-<td th:text="*{id}"></td>
-<td th:text="*{nome}"></td>
-<td th:text="*{descricao}"></td>
-<td th:text="*{url}"></td>
-<td th:text="*{area}"></td>
-</tr>
-</tbody>
-</table>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">GERENCIAMENTO DE REVISAO</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/../sedes">Ver trabalhos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Ferramentas
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/../sedes">Ferramentas do Sistema</a>
+                        <a class="dropdown-item" href="/../avaliador/criar">Cadastrar Avaliador</a>
+                        <a class="dropdown-item"  href="/../trabalhos/criar">Cadastrar trabalho</a>
+                        <a class="dropdown-item" href="/../categorias/criar">Cadastrar Cadastrar Categorias</a>
+                        <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/../avaliador/listar-avaliadores.html">Ver Avaliadores</a>
+                          <a class="dropdown-item" href="/../categorias/listar-categorias.html">Ver Categorias </a>
+                          <a class="dropdown-item" href="/../trabalhos/listar-trabalhos.html">Ver Trabalhos</a>
+                      </div>
+                    </li>
+            
+                  </ul>
+            
+                </div>
+              </nav>
+  
+     
+  
+        <div class="album py-5 bg-light">
+          <div class="container">
+  
+                <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Descrição</th>
+                                <th>Url</th>
+                                <th>Editar</th>
+                                <th>Deletar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
+                                    <td th:text="*{id}"></td>
+                                    <td th:text="*{titulo}"></td>
+                                    <td th:text="*{descricao}"></td>
+                                    <td th:text="*{url}"></td>
+                                    <td><a th:href="@{/trabalhos/editar(id=${trabalho.id})}">
+                                      <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
+                                  </a></td>
+                                  <td><a th:href="@{/trabalhos/deletar(id=${trabalho.id})}">
+                                      <i class="fa fa-times" aria-hidden="true">Deletar</i>
+                                  </a></td>
+              
+                                </tr>
+                            </tbody>
+                    </table>
+              </div>
+  </div>
+  
+  
 </body>
+
+
 </html>
