@@ -1,9 +1,12 @@
 package br.ufjf.dcc193.tomatoban.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 
 
@@ -16,6 +19,8 @@ public class Categoria {
     private Long id;
     private String nome;
     
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Avaliador> avaliadores;
     
 
     public Categoria() {

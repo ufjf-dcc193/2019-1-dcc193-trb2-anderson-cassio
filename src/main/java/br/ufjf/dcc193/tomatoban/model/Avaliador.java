@@ -1,9 +1,13 @@
 package br.ufjf.dcc193.tomatoban.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 
 
@@ -16,17 +20,35 @@ public class Avaliador {
     private Long id;
     private String nome;
     private String email;
-    
+    private String password;
+
+    @ManyToMany
+    @JoinTable(
+      name = "categorias")
+    private Set<Categoria> categorias;
 
 
     public Avaliador() {
 
     }
 
-    public Avaliador(String nome, String email){
+    public Avaliador(String nome, String email, String password){
         this.nome = nome;
         this.email = email;
-           
+        this.password = password;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
