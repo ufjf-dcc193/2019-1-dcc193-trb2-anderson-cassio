@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.tomatoban;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufjf.dcc193.tomatoban.model.Avaliador;
+import br.ufjf.dcc193.tomatoban.model.Categoria;
 import br.ufjf.dcc193.tomatoban.repository.AvaliadorRepository;
+import br.ufjf.dcc193.tomatoban.repository.CategoriaRepository;
 
 
 @Controller
@@ -25,6 +28,10 @@ public class AvaliadorController {
     
     @Autowired
     AvaliadorRepository avaliadorRepository;
+    
+        
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     @RequestMapping({ "", "/", "/index.html" })
     public ModelAndView AvaliadorIndex() {
@@ -34,7 +41,46 @@ public class AvaliadorController {
         return mv;
     }
 
+    @RequestMapping(value = { "/inserir-categoria-avaliador" }, method = RequestMethod.GET)
+    public ModelAndView inserirCategoriaAvaliador(@RequestParam("id") Long id,@RequestParam("id_cat") Long id_cat) {
+        List<Categoria> categoriasAvaliador = new ArrayList();
+        Avaliador avaliador = avaliadorRepository.getOne(id);
+        Categoria categoria = categoriaRepository.getOne(id_cat);
+        
+        categoriasAvaliador =  avaliador.getCategorias();
+        categoriasAvaliador.add(categoria);
+        
+        
+
+        avaliador.setCategorias(categoriasAvaliador);
+        
+        avaliador.setId(id);
+        avaliadorRepository.save(avaliador);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("avaliador", avaliador);
+        mv.addObject("categoriasAvaliador", categoriasAvaliador);
+        List<Categoria> categorias = categoriaRepository.findAll();
+        mv.addObject("categorias", categorias);
+        mv.setViewName("inserir-categoria-avaliador.html");
+        return mv;
+
+}
     
+    @RequestMapping(value = { "/inserir-categoria" }, method = RequestMethod.GET)
+    public ModelAndView inserirCategoria(@RequestParam("id") Long id) {
+        Avaliador avaliador = avaliadorRepository.getOne(id);
+        ModelAndView mv = new ModelAndView();
+
+        
+        mv.addObject("avaliador", avaliador);
+        List<Categoria> categorias = categoriaRepository.findAll();
+        mv.addObject("categorias", categorias);
+
+        mv.addObject("categoriasAvaliador", avaliador.getCategorias());
+        mv.setViewName("inserir-categoria-avaliador.html");
+        return mv;
+
+}
 
     
     @RequestMapping("/criar")

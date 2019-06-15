@@ -63,27 +63,21 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Categoria</th>
-                                <th>Email</th>
-                                <th>Inserir Categoria</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="avaliador: ${avaliadores}" th:object="${avaliador}">
+                            <tr th:each="categoria: ${categorias}" th:object="${categoria}">
                                 <td th:text="*{id}"></td>
                                 <td th:text="*{nome}"></td>
-                                <td th:text="*{email}"></td>
-                                <td><a th:href="@{'/../avaliador/inserir-categoria?id=' + ${avaliador.id}}">
-                                  <i class="fa fa-pencil" aria-hidden="true"> Inserir Categoria</i>
-                              </a></td>
-                                <td><a th:href="@{'/../avaliador/editar?id=' + ${avaliador.id}}">
+                                <td><a th:href="@{'/../categorias/editar?id=' + ${categoria.id}}">
                                   <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
                               </a></td>
-                              <td><a th:href="@{'/../avaliador/deletar?id=' + ${avaliador.id}}">
-                                <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
-                            </a></td>
+                              <td><a th:href="@{'/../categorias/deletar?id=' + ${categoria.id}}">
+                                  <i class="fa fa-times" aria-hidden="true">Deletar</i>
+                              </a></td>
                             </tr>
                         </tbody>
                     </table>

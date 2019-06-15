@@ -1,6 +1,6 @@
 package br.ufjf.dcc193.tomatoban.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,9 +24,23 @@ public class Avaliador {
 
     @ManyToMany
     @JoinTable(
-      name = "categorias")
-    private Set<Categoria> categorias;
+    name = "categorias")
+    private List<Categoria> categorias;
 
+ 
+    /**
+     * @return the categorias
+     */
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    /**
+     * @param categorias the categorias to set
+     */
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     public Avaliador() {
 

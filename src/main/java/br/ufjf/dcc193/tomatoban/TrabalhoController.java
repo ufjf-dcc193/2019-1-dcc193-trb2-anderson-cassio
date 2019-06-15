@@ -19,8 +19,8 @@ import br.ufjf.dcc193.tomatoban.repository.CategoriaRepository;
 
 
 @Controller
-@RequestMapping("/categorias")
-public class CategoriaController {
+@RequestMapping("/trabalhos")
+public class TrabalhoController {
     
     
     @Autowired
