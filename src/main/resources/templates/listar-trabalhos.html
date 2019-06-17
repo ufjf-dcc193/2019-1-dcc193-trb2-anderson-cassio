@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Atividade: Nova</title>
+    <title>Listar trabalhos</title>
 </head>
 
 
@@ -74,7 +74,7 @@
                                     <td th:text="*{id}"></td>
                                     <td th:text="*{titulo}"></td>
                                     <td th:text="*{descricao}"></td>
-                                    <td th:text="*{url}"></td>
+                              
                                     <td><a th:href="@{/trabalhos/editar(id=${trabalho.id})}">
                                       <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
                                   </a></td>

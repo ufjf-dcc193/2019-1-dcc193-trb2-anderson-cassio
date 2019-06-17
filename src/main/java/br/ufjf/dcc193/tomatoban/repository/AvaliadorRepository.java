@@ -9,4 +9,5 @@ import br.ufjf.dcc193.tomatoban.model.Avaliador;
 @Repository
 public interface AvaliadorRepository extends JpaRepository<Avaliador, Long>{
     
+    Avaliador findByEmail(String email);
 }

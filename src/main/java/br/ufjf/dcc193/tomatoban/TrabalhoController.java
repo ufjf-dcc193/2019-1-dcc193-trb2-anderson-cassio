@@ -15,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufjf.dcc193.tomatoban.model.Categoria;
+import br.ufjf.dcc193.tomatoban.model.Trabalho;
 import br.ufjf.dcc193.tomatoban.repository.CategoriaRepository;
+import br.ufjf.dcc193.tomatoban.repository.TrabalhoRepository;
 
 
 @Controller
 @RequestMapping("/trabalhos")
 public class TrabalhoController {
     
+    @Autowired
+    TrabalhoRepository trabalhoRepository;
     
     @Autowired
     CategoriaRepository categoriaRepository;
@@ -39,32 +43,35 @@ public class TrabalhoController {
     
     @RequestMapping("/criar")
     public ModelAndView nova(){
-            Categoria categoria = new Categoria();
+            List<Categoria> categorias = categoriaRepository.findAll();
+            Trabalho trabalho = new Trabalho();
             ModelAndView mv = new ModelAndView();
-            mv.setViewName("criar-categoria.html");
-            mv.addObject("categoria", categoria);
+            mv.setViewName("criar-trabalho.html");
+            mv.addObject("trabalho", trabalho);
+            mv.addObject("categorias", categorias);
             return mv;
     }
 
-    @PostMapping(value="/criar-categoria.html")
-    public ModelAndView criar(@Valid Categoria categoria, BindingResult binding){
+    @PostMapping(value="/criar-trabalho.html")
+    public ModelAndView criar(@Valid Trabalho trabalho, BindingResult binding,@RequestParam("categoria") Long id_cat){
             ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
                 mv.setViewName("criar-categoria");
-                mv.addObject("categoria", categoria);
+                mv.addObject("trabalho", trabalho);
                 return mv;
             }
-            categoriaRepository.save(categoria);
-            mv.setViewName("redirect:/categorias/listar-categorias.html");
+            trabalho.setTrabalhoAreaDeConhecimento(categoriaRepository.getOne(id_cat));
+            trabalhoRepository.save(trabalho);
+            mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
             return mv;
     }
 
-    @GetMapping(value="/listar-categorias.html")
+    @GetMapping(value="/listar-trabalhos.html")
     public ModelAndView listar(){
-        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Trabalho> trabalhos = trabalhoRepository.findAll();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("listar-categorias.html");
-        mv.addObject("categorias", categorias);
+        mv.setViewName("listar-trabalhos.html");
+        mv.addObject("trabalhos", trabalhos);
         return mv;
     }
 

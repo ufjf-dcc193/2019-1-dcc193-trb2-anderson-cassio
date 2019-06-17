@@ -41,19 +41,28 @@ public class AvaliadorController {
         return mv;
     }
 
+   
+    @RequestMapping(value = { "/categorias-avaliador" }, method = RequestMethod.GET)
+    public ModelAndView categoriasAvaliador(@RequestParam("id") Long id) {
+        Avaliador avaliador = avaliadorRepository.getOne(id);
+        List<Categoria> categoriasAvaliador = new ArrayList();
+        categoriasAvaliador =  avaliador.getCategorias();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("avaliador", avaliador);
+        mv.addObject("categoriasAvaliador", categoriasAvaliador);
+        mv.setViewName("categorias-avaliador.html");
+        return mv;
+
+}
+   
     @RequestMapping(value = { "/inserir-categoria-avaliador" }, method = RequestMethod.GET)
     public ModelAndView inserirCategoriaAvaliador(@RequestParam("id") Long id,@RequestParam("id_cat") Long id_cat) {
         List<Categoria> categoriasAvaliador = new ArrayList();
         Avaliador avaliador = avaliadorRepository.getOne(id);
         Categoria categoria = categoriaRepository.getOne(id_cat);
-        
         categoriasAvaliador =  avaliador.getCategorias();
         categoriasAvaliador.add(categoria);
-        
-        
-
         avaliador.setCategorias(categoriasAvaliador);
-        
         avaliador.setId(id);
         avaliadorRepository.save(avaliador);
         ModelAndView mv = new ModelAndView();
@@ -70,25 +79,45 @@ public class AvaliadorController {
     public ModelAndView inserirCategoria(@RequestParam("id") Long id) {
         Avaliador avaliador = avaliadorRepository.getOne(id);
         ModelAndView mv = new ModelAndView();
-
-        
         mv.addObject("avaliador", avaliador);
         List<Categoria> categorias = categoriaRepository.findAll();
         mv.addObject("categorias", categorias);
-
         mv.addObject("categoriasAvaliador", avaliador.getCategorias());
         mv.setViewName("inserir-categoria-avaliador.html");
         return mv;
-
 }
-
-    
     @RequestMapping("/criar")
     public ModelAndView nova(){
             Avaliador avaliador = new Avaliador();
             ModelAndView mv = new ModelAndView();
             mv.setViewName("criar-avaliador.html");
             mv.addObject("avaliador", avaliador);
+            return mv;
+    }
+
+    @RequestMapping("/cadastrar")
+    public ModelAndView cadastrarPlataforma(){
+            Avaliador avaliador = new Avaliador();
+            ModelAndView mv = new ModelAndView();
+            List<Categoria> categorias = categoriaRepository.findAll();
+            mv.setViewName("cadastrar-plataforma.html");
+            mv.addObject("avaliador", avaliador);
+            mv.addObject("categorias", categorias);
+            return mv;
+    }
+
+    @PostMapping(value="/cadastrar-plataforma.html")
+    public ModelAndView cadastrarPlataforma(@Valid Avaliador avaliador, BindingResult binding){
+            ModelAndView mv = new ModelAndView();
+            if(binding.hasErrors()){
+                mv.setViewName("criar-avaliador");
+                mv.addObject("avaliador", avaliador);
+                return mv;
+            }
+            avaliadorRepository.save(avaliador);
+            avaliador = avaliadorRepository.findByEmail(avaliador.getEmail());
+            mv.setViewName("listar-avaliador.html");
+            mv.addObject("avaliadores", avaliador);
             return mv;
     }
 

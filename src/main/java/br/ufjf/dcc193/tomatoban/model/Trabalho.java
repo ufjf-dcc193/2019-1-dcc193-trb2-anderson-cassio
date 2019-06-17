@@ -22,10 +22,9 @@ public class Trabalho {
     private String url;
 
   
-  
     @ManyToOne
     @JoinColumn
-    private Categoria areaDeConhecimento;
+    private Categoria trabalhoAreaDeConhecimento;
 
     public Trabalho() {
 
@@ -66,19 +65,20 @@ public class Trabalho {
          return id;
      }
 
-     /**
-      * @return the areaDeConhecimento
-      */
-     public Categoria getAreaDeConhecimento() {
-         return areaDeConhecimento;
+     
+
+     public Categoria getTrabalhoAreaDeConhecimento() {
+         return trabalhoAreaDeConhecimento;
      }
 
      /**
-      * @param areaDeConhecimento the areaDeConhecimento to set
+      * @param trabalhoAreaDeConhecimento the trabalhoAreaDeConhecimento to set
       */
-     public void setAreaDeConhecimento(Categoria areaDeConhecimento) {
-         this.areaDeConhecimento = areaDeConhecimento;
+     public void setTrabalhoAreaDeConhecimento(Categoria trabalhoAreaDeConhecimento) {
+         this.trabalhoAreaDeConhecimento = trabalhoAreaDeConhecimento;
      }
+    
+     
 
      /**
       * @param descricao the descricao to set

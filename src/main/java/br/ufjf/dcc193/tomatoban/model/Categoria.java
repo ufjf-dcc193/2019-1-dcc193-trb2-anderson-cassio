@@ -2,11 +2,13 @@ package br.ufjf.dcc193.tomatoban.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 
@@ -22,6 +24,9 @@ public class Categoria {
     @ManyToMany(mappedBy = "categorias")
     private Set<Avaliador> avaliadores;
     
+
+    @OneToMany(mappedBy = "trabalhoAreaDeConhecimento", cascade = CascadeType.ALL)
+    private Set<Trabalho> trabalhos;
 
     public Categoria() {
 

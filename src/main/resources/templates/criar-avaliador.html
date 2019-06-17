@@ -72,8 +72,13 @@
           <label>Password: <input type="password" class="form-control" th:field="*{password}"></label>
           <strong th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></strong>
       </div>
+
+
+
+
+
         <div class="form-group">
-            <input class="btn btn-primary my-2" type="submit" />
+            <input class="btn btn-primary my-2" type="submit" value = "Cadastrar" />
             <input  class="btn btn-primary my-2" type="reset" />
         </div>
     </form>
