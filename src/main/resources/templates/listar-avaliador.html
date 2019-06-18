@@ -65,9 +65,7 @@
                                 <th>Categoria</th>
                                 <th>Email</th>
                                 <th>Inserir Categoria</th>
-                                <th>Editar</th>
-                                <th>Excluir</th>
-
+                              
                             </tr>
                         </thead>
                         <tbody>
@@ -75,15 +73,11 @@
                                 <td th:text="*{id}"></td>
                                 <td th:text="*{nome}"></td>
                                 <td th:text="*{email}"></td>
-                                <td><a th:href="@{'/../avaliador/inserir-categoria?id=' + ${avaliador.id}}">
+                                <td><a th:href="@{'/../avaliador/inserir-categoria-cadastro?id=' + ${avaliador.id}}">
                                   <i class="fa fa-pencil" aria-hidden="true"> Inserir Categoria</i>
                               </a></td>
-                                <td><a th:href="@{'/../avaliador/editar?id=' + ${avaliador.id}}">
-                                  <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
-                              </a></td>
-                              <td><a th:href="@{'/../avaliador/deletar?id=' + ${avaliador.id}}">
-                                <i class="fa fa-pencil" aria-hidden="true"> Excluir</i>
-                            </a></td>
+                              
+                            
                             </tr>
                         </tbody>
                     </table>

@@ -52,52 +52,53 @@
   </nav>
 
   
+ 
+
   <div class="album py-5 bg-light">
-    <div class="container">
-          <h6> Categorias disponíveis</h6>
-
-           <table class="table">
-                  <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Categoria</th>
-                          <th>Inserir</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr th:each="categoria: ${categorias}" th:object="${categoria}">
-                          <td th:text="*{id}"></td>
-                          <td th:text="*{nome}"></td>
-                          <td><a th:href="@{'/../avaliador/inserir-categoria-avaliador?id=' + ${avaliador.id} + '&id_cat=' + ${categoria.id}}">
-                            <i class="fa fa-pencil" aria-hidden="true"> Inserir</i>
-                        </a></td>
-                        
-                      </tr>
-                  </tbody>
-              </table>
-        </div>
-</div>
-
-<div class="container">
-  <h6> Lista de Categorias do Avaliador</h6>
-      <table class="table">
-              <thead>
-                  <tr>
-                
-                      <th>Categoria</th>
-           
-                  </tr>
-              </thead>
-              <tbody>
-                <tr th:each="categoriasdas : ${categoriasAvaliador}">
-                  <td><p th:text="${categoriasdas.nome}"></p></td>
-               </tr>
-                     
-                  </tr>
-              </tbody>
-          </table>
-    </div>
-
+      <div class="container">
+            <h6> Categorias disponíveis</h6>
+  
+             <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Categoria</th>
+                            <th>Inserir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="categoria: ${categorias}" th:object="${categoria}">
+                            <td th:text="*{id}"></td>
+                            <td th:text="*{nome}"></td>
+                            <td><a th:href="@{'/../avaliador/inserir-categoria-avaliador?id=' + ${avaliador.id} + '&id_cat=' + ${categoria.id}}">
+                              <i class="fa fa-pencil" aria-hidden="true"> Inserir</i>
+                          </a></td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+          </div>
+  </div>
+  
+  <div class="container">
+    <h6> Lista de Categorias do Avaliador</h6>
+        <table class="table">
+                <thead>
+                    <tr>
+                  
+                        <th>Categoria</th>
+             
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="categoriasAva : ${categoriasAvaliador}">
+                    <td><p th:text="${categoriasAva.nome}"></p></td>
+                 </tr>
+                       
+                    </tr>
+                </tbody>
+            </table>
+      </div>
 
 
 

@@ -74,6 +74,21 @@ public class AvaliadorController {
         return mv;
 
 }
+    @RequestMapping(value = { "/inserir-categoria-cadastro" }, method = RequestMethod.GET)
+    public ModelAndView categoriasAvaliadorCadastro(@RequestParam("id") Long id) {
+            Avaliador avaliador = avaliadorRepository.getOne(id);
+            List<Categoria> categoriasAvaliador = new ArrayList();
+            categoriasAvaliador =  avaliador.getCategorias();
+            ModelAndView mv = new ModelAndView();
+            List<Categoria> categorias = categoriaRepository.findAll();
+            mv.addObject("avaliador", avaliador);
+            mv.addObject("categorias", categorias);
+            mv.addObject("categoriasAvaliador", categoriasAvaliador);
+            mv.setViewName("categorias-avaliador.html");
+            return mv;
+    
+
+    }
     
     @RequestMapping(value = { "/inserir-categoria" }, method = RequestMethod.GET)
     public ModelAndView inserirCategoria(@RequestParam("id") Long id) {
