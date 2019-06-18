@@ -1,4 +1,4 @@
-package br.ufjf.dcc193.tomatoban;
+package br.ufjf.dcc193.revisionsystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufjf.dcc193.tomatoban.model.Avaliador;
-import br.ufjf.dcc193.tomatoban.model.Categoria;
-import br.ufjf.dcc193.tomatoban.repository.AvaliadorRepository;
-import br.ufjf.dcc193.tomatoban.repository.CategoriaRepository;
+import br.ufjf.dcc193.revisionsystem.model.Avaliador;
+import br.ufjf.dcc193.revisionsystem.model.Categoria;
+import br.ufjf.dcc193.revisionsystem.repository.AvaliadorRepository;
+import br.ufjf.dcc193.revisionsystem.repository.CategoriaRepository;
 
 
 @Controller

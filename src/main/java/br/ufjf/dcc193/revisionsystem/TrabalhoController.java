@@ -1,4 +1,4 @@
-package br.ufjf.dcc193.tomatoban;
+package br.ufjf.dcc193.revisionsystem;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.ufjf.dcc193.tomatoban.model.Categoria;
-import br.ufjf.dcc193.tomatoban.model.Trabalho;
-import br.ufjf.dcc193.tomatoban.repository.CategoriaRepository;
-import br.ufjf.dcc193.tomatoban.repository.TrabalhoRepository;
+import br.ufjf.dcc193.revisionsystem.model.Categoria;
+import br.ufjf.dcc193.revisionsystem.model.Trabalho;
+import br.ufjf.dcc193.revisionsystem.repository.CategoriaRepository;
+import br.ufjf.dcc193.revisionsystem.repository.TrabalhoRepository;
 
 
 @Controller

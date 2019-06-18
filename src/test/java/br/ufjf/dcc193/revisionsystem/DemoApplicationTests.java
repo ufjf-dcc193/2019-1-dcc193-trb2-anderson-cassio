@@ -1,4 +1,4 @@
-package br.ufjf.dcc193.tomatoban;
+package br.ufjf.dcc193.revisionsystem;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

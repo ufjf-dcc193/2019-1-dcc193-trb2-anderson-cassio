@@ -1,4 +1,4 @@
-package br.ufjf.dcc193.tomatoban;
+package br.ufjf.dcc193.revisionsystem;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
