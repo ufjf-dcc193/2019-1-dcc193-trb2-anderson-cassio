@@ -30,7 +30,7 @@ public class Trabalho {
   
 
     @OneToMany(mappedBy = "trabalho", cascade = CascadeType.ALL)
-    private Set<Trabalho> revisoes;
+    private Set<Revisao> revisoes;
 
 
     public Trabalho() {
