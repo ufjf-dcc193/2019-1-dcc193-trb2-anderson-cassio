@@ -1,0 +1,36 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="menu">
+        <a class="navbar-brand" href="#">GERENCIAMENTO DE REVISAO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/../sedes">Ver trabalhos</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Ferramentas
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/../avaliador/criar">Cadastrar Avaliador</a>
+                <a class="dropdown-item"  href="/../trabalhos/criar">Cadastrar trabalho</a>
+                <a class="dropdown-item" href="/../categorias/criar">Cadastrar Categorias</a>
+                <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/../avaliador/listar-avaliadores.html">Ver Avaliadores</a>
+                  <a class="dropdown-item" href="/../categorias/listar-categorias.html">Ver Categorias </a>
+                  <a class="dropdown-item" href="/../trabalhos/listar-trabalhos.html">Ver Trabalhos</a>
+              </div>
+            </li>
+    
+          </ul>
+    
+        </div>
+      </nav>
