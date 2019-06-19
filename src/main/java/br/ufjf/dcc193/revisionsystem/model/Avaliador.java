@@ -117,4 +117,14 @@ public class Avaliador {
         this.email = email;
     }
 
+    public Set<Revisao> getRevisoes() {
+        return revisoes;
+    }
+
+    public void setRevisoes(Set<Revisao> revisoes) {
+        this.revisoes = revisoes;
+    }
+
+    
+
 }
