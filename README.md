@@ -3,8 +3,10 @@
 
 Projeto realizado por:
 
-* Cássio Reis
+* CÃ¡ssio Reis
+	cassio.reis@engenharia.ufjf.br
+	201576041
 
-* Jônatas Sousa de Faria André
+* JÃ´natas Sousa de Faria AndrÃ©
 	jjsfandre@gmail.com
 	201676030
