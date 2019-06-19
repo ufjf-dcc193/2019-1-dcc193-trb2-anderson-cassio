@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import br.ufjf.dcc193.revisionsystem.model.Revisao;
 
-
 @Repository
-public interface RevisaoRepository extends JpaRepository<Revisao, Long>{
-    
+public interface RevisaoRepository extends JpaRepository<Revisao, Long> {
+
 }

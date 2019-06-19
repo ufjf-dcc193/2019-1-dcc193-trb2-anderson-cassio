@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import br.ufjf.dcc193.revisionsystem.model.Avaliador;
 
-
 @Repository
-public interface AvaliadorRepository extends JpaRepository<Avaliador, Long>{
-    
+public interface AvaliadorRepository extends JpaRepository<Avaliador, Long> {
+
     Avaliador findByEmail(String email);
 }

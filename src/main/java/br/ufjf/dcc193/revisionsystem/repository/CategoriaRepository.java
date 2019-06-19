@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import br.ufjf.dcc193.revisionsystem.model.Categoria;
 
-
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
-    
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+
 }

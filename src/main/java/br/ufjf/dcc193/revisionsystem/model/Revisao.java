@@ -1,6 +1,5 @@
 package br.ufjf.dcc193.revisionsystem.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,14 +20,12 @@ public class Revisao {
     private String descricao;
     private Status status;
 
-
-  
     @ManyToOne
     private Avaliador avaliador;
     @ManyToOne
     private Trabalho trabalho;
 
-    public Revisao(){
+    public Revisao() {
 
     }
 
@@ -40,7 +37,6 @@ public class Revisao {
         this.trabalho = trabalho;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -89,7 +85,4 @@ public class Revisao {
         this.trabalho = trabalho;
     }
 
-
-    
-    
 }

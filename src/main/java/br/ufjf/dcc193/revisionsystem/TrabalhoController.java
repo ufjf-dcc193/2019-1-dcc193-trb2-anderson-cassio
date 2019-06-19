@@ -19,14 +19,13 @@ import br.ufjf.dcc193.revisionsystem.model.Trabalho;
 import br.ufjf.dcc193.revisionsystem.repository.CategoriaRepository;
 import br.ufjf.dcc193.revisionsystem.repository.TrabalhoRepository;
 
-
 @Controller
 @RequestMapping("/trabalhos")
 public class TrabalhoController {
-    
+
     @Autowired
     TrabalhoRepository trabalhoRepository;
-    
+
     @Autowired
     CategoriaRepository categoriaRepository;
 
@@ -38,43 +37,40 @@ public class TrabalhoController {
         return mv;
     }
 
-    
-
-    
     @RequestMapping("/criar")
-    public ModelAndView nova(){
-            List<Categoria> categorias = categoriaRepository.findAll();
-            Trabalho trabalho = new Trabalho();
-            ModelAndView mv = new ModelAndView();
-            mv.setViewName("criar-trabalho.html");
+    public ModelAndView nova() {
+        List<Categoria> categorias = categoriaRepository.findAll();
+        Trabalho trabalho = new Trabalho();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("criar-trabalho.html");
+        mv.addObject("trabalho", trabalho);
+        mv.addObject("categorias", categorias);
+        return mv;
+    }
+
+    @PostMapping(value = "/criar-trabalho.html")
+    public ModelAndView criar(@Valid Trabalho trabalho, BindingResult binding,
+            @RequestParam("trabalhoAreaDeConhecimento") Long id_cat) {
+        ModelAndView mv = new ModelAndView();
+        if (binding.hasErrors()) {
+            mv.setViewName("criar-trabalho");
             mv.addObject("trabalho", trabalho);
-            mv.addObject("categorias", categorias);
             return mv;
+        }
+        trabalho.setTrabalhoAreaDeConhecimento(categoriaRepository.getOne(id_cat));
+        trabalhoRepository.save(trabalho);
+        mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
+        return mv;
     }
 
-    @PostMapping(value="/criar-trabalho.html")
-    public ModelAndView criar(@Valid Trabalho trabalho, BindingResult binding,@RequestParam("trabalhoAreaDeConhecimento") Long id_cat){
-            ModelAndView mv = new ModelAndView();
-            if(binding.hasErrors()){
-                mv.setViewName("criar-trabalho");
-                mv.addObject("trabalho", trabalho);
-                return mv;
-            }
-            trabalho.setTrabalhoAreaDeConhecimento(categoriaRepository.getOne(id_cat));
-            trabalhoRepository.save(trabalho);
-            mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
-            return mv;
-    }
-
-    @GetMapping(value="/listar-trabalhos.html")
-    public ModelAndView listar(){
+    @GetMapping(value = "/listar-trabalhos.html")
+    public ModelAndView listar() {
         List<Trabalho> trabalhos = trabalhoRepository.findAll();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("listar-trabalhos.html");
         mv.addObject("trabalhos", trabalhos);
         return mv;
     }
-
 
     @RequestMapping(value = { "/editar" }, method = RequestMethod.GET)
     public ModelAndView editar(@RequestParam("id") Long id) {
@@ -86,22 +82,22 @@ public class TrabalhoController {
         mv.setViewName("criar-trabalho.html");
         return mv;
 
-}
+    }
 
-  
-@RequestMapping(value = { "/deletar" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/deletar" }, method = RequestMethod.GET)
     public ModelAndView deletar(@RequestParam("id") Long id) {
         trabalhoRepository.deleteById(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
         return mv;
 
-}
+    }
 
-@PostMapping(value="/editar-trabalho.html")
-public ModelAndView editar(@RequestParam(value = "id", required = true) Long id ,@Valid Trabalho trabalho, BindingResult binding){
+    @PostMapping(value = "/editar-trabalho.html")
+    public ModelAndView editar(@RequestParam(value = "id", required = true) Long id, @Valid Trabalho trabalho,
+            BindingResult binding) {
         ModelAndView mv = new ModelAndView();
-        if(binding.hasErrors()){
+        if (binding.hasErrors()) {
             mv.setViewName("criar-trabalho");
             mv.addObject("trabalho", trabalho);
             return mv;
@@ -110,6 +106,6 @@ public ModelAndView editar(@RequestParam(value = "id", required = true) Long id 
         trabalhoRepository.save(trabalho);
         mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
         return mv;
-}
+    }
 
 }

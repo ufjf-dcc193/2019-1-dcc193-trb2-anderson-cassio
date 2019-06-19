@@ -12,11 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-
-
 @Entity
 public class Avaliador {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,14 +23,12 @@ public class Avaliador {
     private String password;
 
     @ManyToMany
-    @JoinTable(
-    name = "categorias")
+    @JoinTable(name = "categorias")
     private List<Categoria> categorias;
 
     @OneToMany(mappedBy = "avaliador", cascade = CascadeType.ALL)
     private Set<Revisao> revisoes;
 
- 
     /**
      * @return the categorias
      */
@@ -52,7 +47,7 @@ public class Avaliador {
 
     }
 
-    public Avaliador(String nome, String email, String password){
+    public Avaliador(String nome, String email, String password) {
         this.nome = nome;
         this.email = email;
         this.password = password;
@@ -64,6 +59,7 @@ public class Avaliador {
     public String getPassword() {
         return password;
     }
+
     /**
      * @param password the password to set
      */

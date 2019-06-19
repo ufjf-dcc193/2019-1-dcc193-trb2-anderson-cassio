@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-
-
-
 @Entity
 public class Categoria {
 
@@ -20,10 +17,9 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nome;
-    
+
     @ManyToMany(mappedBy = "categorias")
     private Set<Avaliador> avaliadores;
-    
 
     @OneToMany(mappedBy = "trabalhoAreaDeConhecimento", cascade = CascadeType.ALL)
     private Set<Trabalho> trabalhos;
@@ -36,7 +32,6 @@ public class Categoria {
         this.nome = nome;
     }
 
- 
     /**
      * @return the nome
      */
