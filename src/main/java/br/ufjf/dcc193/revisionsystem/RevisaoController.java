@@ -1,0 +1,74 @@
+package br.ufjf.dcc193.revisionsystem;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import br.ufjf.dcc193.revisionsystem.model.Avaliador;
+import br.ufjf.dcc193.revisionsystem.model.Categoria;
+import br.ufjf.dcc193.revisionsystem.model.Revisao;
+import br.ufjf.dcc193.revisionsystem.model.Status;
+import br.ufjf.dcc193.revisionsystem.model.Trabalho;
+import br.ufjf.dcc193.revisionsystem.repository.AvaliadorRepository;
+import br.ufjf.dcc193.revisionsystem.repository.CategoriaRepository;
+import br.ufjf.dcc193.revisionsystem.repository.RevisaoRepository;
+import br.ufjf.dcc193.revisionsystem.repository.TrabalhoRepository;
+
+@Controller
+@RequestMapping("/revisao")
+public class RevisaoController {
+
+
+    @Autowired
+    TrabalhoRepository trabalhoRepository;
+
+    @Autowired
+    CategoriaRepository categoriaRepository;
+
+    @Autowired
+    RevisaoRepository revisaoRepository;
+
+    @Autowired
+    AvaliadorRepository avaliadorRepository;
+
+    @RequestMapping("/avaliar")
+    public ModelAndView DetalheTrabalho(@RequestParam("id") Long id, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+
+        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+        Trabalho trabalho = trabalhoRepository.getOne(id);
+        Set<Revisao> revisoes = trabalho.getRevisoes();
+        Revisao revisao = new Revisao();
+        for (Revisao r : revisoes) {
+            if (r.getAvaliador().equals(avaliador)){
+                revisao = r;
+                break;
+            }
+        }
+        List<Categoria> categorias = categoriaRepository.findAll();
+        mv.addObject("categorias", categorias);
+        mv.addObject("trabalho", trabalho);
+        mv.addObject("revisao", revisao);
+        mv.setViewName("trabalho-detalhe");
+        return mv;
+    }
+
+    @RequestMapping("/revisar-trabalho.html")
+    public ModelAndView RevisarTrabalho(@Valid Revisao revisao, Long idTrabalho, String tipoAvaliacao) {
+        ModelAndView mv = new ModelAndView();
+        Trabalho trabalho = trabalhoRepository.getOne(idTrabalho);
+        mv.addObject("id", trabalho.getTrabalhoAreaDeConhecimento().getId());
+        mv.setViewName("redirect:/trabalhos/listar-trabalhos-categoria");
+        return mv;
+    }
+
+}

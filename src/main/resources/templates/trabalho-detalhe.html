@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <em th:replace="_shared/style :: style"></em>
+  <title>Novo trabalho</title>
+</head>
+
+<body>
+  <nav th:replace="_shared/menu :: menu"></nav>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+
+
+      <form th:action="@{criar-trabalho.html}" method="post" th:object="${trabalho}">
+        <input type="hidden" class="form-control" th:field="*{id}">
+        <div class="form-group">
+
+          <label>Titulo: <input disabled type="text" class="form-control" th:field="*{titulo}"></label>
+
+        </div>
+        <div class="form-group">
+            <label>Descricao: <input disabled type="text" class="form-control" th:field="*{descricao}"></label>
+        </div>
+        <div class="form-group">
+            <label>URL: <input disabled type="text" class="form-control" th:field="*{url}"></label>
+        </div>
+       
+        <label>Categoria: <select class="form-control" disabled th:field="*{trabalhoAreaDeConhecimento}" >
+        <option th:each="categoria : ${categorias}"
+                th:value="${categoria.id}"
+                th:text="${categoria.nome}">Part name</option>
+      </select> </label>
+
+        
+    </form>
+
+    <form th:action="@{revisar-trabalho.html}" method="post" th:object="${revisao}" id="formAvaliar">
+        <input type="hidden" class="form-control" th:field="*{id}">
+        <input type="hidden" class="form-control" id="idTrabalho" name="idTrabalho" th:value="${trabalho.getId()}">
+        <input type="hidden" id="tipoAvaliacao" name="tipoAvaliacao" />
+        <div class="form-group">
+
+          <label>Nota: <input  type="number" class="form-control" th:field="*{nota}"></label>
+
+        </div>
+        <div class="form-group">
+            <label>Descricao: <input  type="text" class="form-control" th:field="*{descricao}"></label>
+        </div>        
+        <div class="form-group">
+            <input class="btn btn-primary my-2" type="button" value = "Revisar agora" onclick="submitForm('agora')"/>
+            <input class="btn btn-primary my-2" type="button" value = "Revisar depois" onclick="submitForm('depois')"/>
+            <input class="btn btn-primary my-2" type="button" value = "Pular" onclick="submitForm('pular')"/>
+        </div>
+    </form>
+    
+
+</div>
+</div>
+
+
+<div th:replace="_shared/scripts :: scripts"></div>
+</body>
+
+<script>
+    function submitForm(source) {
+        let form = document.getElementById('formAvaliar');
+        let elm = document.getElementById('tipoAvaliacao');
+        elm.setAttribute('value', source);
+        form.submit();
+    }
+</script>
+
+
+</html>

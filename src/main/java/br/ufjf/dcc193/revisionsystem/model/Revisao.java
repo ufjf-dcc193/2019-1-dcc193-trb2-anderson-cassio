@@ -20,13 +20,11 @@ public class Revisao {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @NotBlank(message="Nota obrigatória")
     @Digits(integer = 3, fraction = 0)
     @Min(0)
     @Max(100)
     private int nota;
     private String descricao;
-    @NotNull
     private Status status;
 
     @ManyToOne

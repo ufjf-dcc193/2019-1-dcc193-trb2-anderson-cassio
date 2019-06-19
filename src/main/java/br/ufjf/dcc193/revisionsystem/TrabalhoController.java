@@ -81,7 +81,7 @@ public class TrabalhoController {
         Categoria categoria = categoriaRepository.getOne(id);
         List<Trabalho> trabalhos = new ArrayList<>(categoria.getTrabalhos());
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("listar-trabalhos.html");
+        mv.setViewName("listar-trabalhos-a-avaliar.html");
 
         Collections.sort(trabalhos, new Comparator<Trabalho>() {
             @Override
