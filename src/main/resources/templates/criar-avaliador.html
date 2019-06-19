@@ -19,6 +19,7 @@
 
 
       <form th:action="@{criar-avaliador.html}" method="post" th:object="${avaliador}">
+          <input type="hidden" class="form-control" th:field="*{id}">
         <div class="form-group">
 
           <label>Nome: <input type="text" class="form-control" th:field="*{nome}"></label>
