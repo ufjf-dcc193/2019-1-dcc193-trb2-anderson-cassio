@@ -53,10 +53,10 @@ public class TrabalhoController {
     }
 
     @PostMapping(value="/criar-trabalho.html")
-    public ModelAndView criar(@Valid Trabalho trabalho, BindingResult binding,@RequestParam("categoria") Long id_cat){
+    public ModelAndView criar(@Valid Trabalho trabalho, BindingResult binding,@RequestParam("trabalhoAreaDeConhecimento") Long id_cat){
             ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
-                mv.setViewName("criar-categoria");
+                mv.setViewName("criar-trabalho");
                 mv.addObject("trabalho", trabalho);
                 return mv;
             }
@@ -78,10 +78,12 @@ public class TrabalhoController {
 
     @RequestMapping(value = { "/editar" }, method = RequestMethod.GET)
     public ModelAndView editar(@RequestParam("id") Long id) {
-        Categoria categoria = categoriaRepository.getOne(id);
+        List<Categoria> categorias = categoriaRepository.findAll();
+        Trabalho trabalho = trabalhoRepository.getOne(id);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("categoria", categoria);
-        mv.setViewName("editar-categoria.html");
+        mv.addObject("categorias", categorias);
+        mv.addObject("trabalho", trabalho);
+        mv.setViewName("criar-trabalho.html");
         return mv;
 
 }
@@ -89,24 +91,24 @@ public class TrabalhoController {
   
 @RequestMapping(value = { "/deletar" }, method = RequestMethod.GET)
     public ModelAndView deletar(@RequestParam("id") Long id) {
-        categoriaRepository.deleteById(id);
+        trabalhoRepository.deleteById(id);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("redirect:/categorias/listar-categorias.html");
+        mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
         return mv;
 
 }
 
-@PostMapping(value="/editar-categoria.html")
-public ModelAndView editar(@RequestParam(value = "id", required = true) Long id ,@Valid Categoria categoria, BindingResult binding){
+@PostMapping(value="/editar-trabalho.html")
+public ModelAndView editar(@RequestParam(value = "id", required = true) Long id ,@Valid Trabalho trabalho, BindingResult binding){
         ModelAndView mv = new ModelAndView();
         if(binding.hasErrors()){
-            mv.setViewName("criar-categoria");
-            mv.addObject("categoria", categoria);
+            mv.setViewName("criar-trabalho");
+            mv.addObject("trabalho", trabalho);
             return mv;
         }
-        categoria.setId(id);
-        categoriaRepository.save(categoria);
-        mv.setViewName("redirect:/trabalhos/listar-categorias.html");
+        trabalho.setId(id);
+        trabalhoRepository.save(trabalho);
+        mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
         return mv;
 }
 

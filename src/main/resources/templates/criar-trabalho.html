@@ -19,6 +19,7 @@
 
 
       <form th:action="@{criar-trabalho.html}" method="post" th:object="${trabalho}">
+        <input type="hidden" class="form-control" th:field="*{id}">
         <div class="form-group">
 
           <label>Titulo: <input type="text" class="form-control" th:field="*{titulo}"></label>
@@ -34,7 +35,7 @@
             <strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong>
         </div>
        
-      <select class="form-control" id="categoria" name="categoria" >
+      <select class="form-control" th:field="*{trabalhoAreaDeConhecimento}" >
         <option th:each="categoria : ${categorias}"
                 th:value="${categoria.id}"
                 th:text="${categoria.nome}">Part name</option>
