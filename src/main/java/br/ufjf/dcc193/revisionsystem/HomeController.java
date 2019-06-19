@@ -25,16 +25,8 @@ public class HomeController {
     @RequestMapping({ "", "/", "/index.html" })
     public ModelAndView index(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
-        if (user !=null){
+        if (session.getAttribute("loggedUser") !=null)
             mv.setViewName("index");
-
-            Long userId = user.getId();
-            if (userId == null)
-                mv.addObject("useridNulo", "useridNulo");
-            else
-                mv.addObject("useridNulo", "useridNãoNulo");
-        }
         else
             mv.setViewName("index-nologged");
         return mv;
@@ -76,7 +68,7 @@ public class HomeController {
         if (user == null)
             mv.addObject("errorMessage", "Usuário inválido");
         else if (user.getPassword().equals(avaliador.getPassword())){
-            session.setAttribute("loggedUser", avaliador);
+            session.setAttribute("loggedUser", avaliador.getId());
             mv.addObject("errorMessage", "");
             mv.setViewName("index");
             return mv;

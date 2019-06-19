@@ -72,12 +72,12 @@ public class CategoriaController {
     @GetMapping(value = "/listar-categorias-avaliador")
     public ModelAndView listarCategoriasAvaliador(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        Avaliador usuario = (Avaliador)session.getAttribute("loggedUser");
+        Long usuario = (Long)session.getAttribute("loggedUser");
         if (usuario == null){
             mv.setViewName("login.html");
             return mv;
         }
-        Avaliador avaliador = avaliadorRepository.getOne(usuario.getId());
+        Avaliador avaliador = avaliadorRepository.getOne(usuario);
         List<Categoria> categorias = avaliador.getCategorias();
         mv.setViewName("listar-categorias-avaliador.html");
         mv.addObject("categorias", categorias);

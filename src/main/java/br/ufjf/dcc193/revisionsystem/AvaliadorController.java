@@ -163,7 +163,7 @@ public class AvaliadorController {
             return mv;
         }
         avaliadorRepository.save(avaliador);
-        session.setAttribute("loggedUser", avaliador);
+        session.setAttribute("loggedUser", avaliador.getId());
         mv.setViewName("index.html");
         return mv;
     }

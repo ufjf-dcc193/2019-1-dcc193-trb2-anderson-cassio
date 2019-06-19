@@ -44,8 +44,8 @@ public class RevisaoController {
     public ModelAndView DetalheTrabalho(@RequestParam("id") Long id, HttpSession session) {
         ModelAndView mv = new ModelAndView();
 
-        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
-        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+        Long user = (Long)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user);
         Trabalho trabalho = trabalhoRepository.getOne(id);
         Set<Revisao> revisoes = trabalho.getRevisoes();
         Revisao revisao = new Revisao();
@@ -68,8 +68,8 @@ public class RevisaoController {
     public ModelAndView RevisarTrabalho(@Valid Revisao revisao, Long idTrabalho, String tipoAvaliacao,HttpSession session){
         ModelAndView mv = new ModelAndView();
         Trabalho trabalho = trabalhoRepository.getOne(idTrabalho);
-        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
-        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+        Long user = (Long)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user);
         
         switch (tipoAvaliacao){
             case "agora": 
@@ -102,8 +102,8 @@ public class RevisaoController {
     public ModelAndView ListarAvaliacoes(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         
-        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
-        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+        Long user = (Long)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user);
 
         List<Revisao> revisoes = avaliador.getRevisoesAvaliadas();
         mv.addObject("revisoes", revisoes);
@@ -112,7 +112,7 @@ public class RevisaoController {
     }
 
     @RequestMapping("/detalhe-revisao")
-    public ModelAndView DetalheAvaliacao (@RequestParam("id") Long id, HttpSession session) {
+    public ModelAndView DetalheAvaliacao (@RequestParam("id") Long id) {
         ModelAndView mv = new ModelAndView();
         
         Revisao revisao = revisaoRepository.getOne(id);
@@ -136,8 +136,8 @@ public class RevisaoController {
         current.setStatus(Status.getStatusByValue(statusEnum));
         revisaoRepository.save(current);
         
-        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
-        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+        Long user = (Long)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user);
 
         List<Revisao> revisoes = avaliador.getRevisoesAvaliadas();
         mv.addObject("revisoes", revisoes);
