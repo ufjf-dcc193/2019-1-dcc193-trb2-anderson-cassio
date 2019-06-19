@@ -31,7 +31,7 @@
             <td th:text="*{nome}"></td>
             <td><a
                 th:href="@{'/../avaliador/inserir-categoria-avaliador?id=' + ${avaliador.id} + '&id_cat=' + ${categoria.id}}">
-                <i class="fa fa-pencil" aria-hidden="true"> Inserir</i>
+                <i class="fa fa-plus" aria-hidden="true"> Inserir</i>
               </a></td>
 
           </tr>
@@ -44,17 +44,22 @@
     <h6> Lista de Categorias do Avaliador</h6>
     <table class="table">
       <thead>
-        <tr>
-
-          <th>Categoria</th>
-
-        </tr>
+          <tr>
+  
+            <th>Categoria</th>
+            <th>Excluir</th>
+  
+          </tr>
       </thead>
       <tbody>
         <tr th:each="categoriasdas : ${categoriasAvaliador}">
           <td>
             <p th:text="${categoriasdas.nome}"></p>
           </td>
+          <td><a
+              th:href="@{'/../avaliador/excluir-categoria-avaliador?id=' + ${avaliador.id} + '&id_cat=' + ${categoriasdas.id}}">
+              <i class="fa fa-trash" aria-hidden="true"> Excluir</i>
+            </a></td>
         </tr>
 
         </tr>

@@ -46,23 +46,64 @@ public class AvaliadorController {
 
     @RequestMapping(value = { "/inserir-categoria-avaliador" }, method = RequestMethod.GET)
     public ModelAndView inserirCategoriaAvaliador(@RequestParam("id") Long id, @RequestParam("id_cat") Long id_cat) {
-        List<Categoria> categoriasAvaliador = new ArrayList();
         Avaliador avaliador = avaliadorRepository.getOne(id);
         Categoria categoria = categoriaRepository.getOne(id_cat);
-        categoriasAvaliador = avaliador.getCategorias();
-        categoriasAvaliador.add(categoria);
-        avaliador.setCategorias(categoriasAvaliador);
-        avaliador.setId(id);
-        avaliadorRepository.save(avaliador);
+        List<Categoria> categoriasAvaliador = avaliador.getCategorias();
+
+        if (categoriasAvaliador.indexOf(categoria) == -1){
+
+            categoriasAvaliador.add(categoria);
+            avaliador.setCategorias(categoriasAvaliador);
+            avaliador.setId(id);
+            avaliadorRepository.save(avaliador);
+        }
         ModelAndView mv = new ModelAndView();
         mv.addObject("avaliador", avaliador);
         mv.addObject("categoriasAvaliador", categoriasAvaliador);
-        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Categoria> categorias = new ArrayList<Categoria>();
+        populaListasDeCategoriasDeAvaliador(id, categoriasAvaliador,categorias);
         mv.addObject("categorias", categorias);
         mv.setViewName("inserir-categoria-avaliador.html");
         return mv;
 
     }
+
+    @RequestMapping(value = { "/excluir-categoria-avaliador" }, method = RequestMethod.GET)
+    public ModelAndView excluirCategoriaAvaliador(@RequestParam("id") Long id, @RequestParam("id_cat") Long id_cat) {
+        Avaliador avaliador = avaliadorRepository.getOne(id);
+        Categoria categoria = categoriaRepository.getOne(id_cat);
+        List<Categoria> categoriasAvaliador = avaliador.getCategorias();
+
+        if (categoriasAvaliador.indexOf(categoria) != -1){
+
+            categoriasAvaliador.remove(categoria);
+            avaliador.setCategorias(categoriasAvaliador);
+            avaliador.setId(id);
+            avaliadorRepository.save(avaliador);
+        }
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("avaliador", avaliador);
+        mv.addObject("categoriasAvaliador", categoriasAvaliador);
+        List<Categoria> categorias = new ArrayList<Categoria>();
+        populaListasDeCategoriasDeAvaliador(id, categoriasAvaliador,categorias);
+        mv.addObject("categorias", categorias);
+
+        mv.setViewName("inserir-categoria-avaliador.html");
+        return mv;
+
+    }
+
+    private void populaListasDeCategoriasDeAvaliador(Long idAvaliador, List<Categoria> categoriasAvaliador, List<Categoria> categoriasDisponiveis){
+        Avaliador avaliador = avaliadorRepository.getOne(idAvaliador);
+        categoriasAvaliador = avaliador.getCategorias();
+        List<Categoria> todasAsCategorias = categoriaRepository.findAll();
+        for (Categoria cat : todasAsCategorias) {
+            if (categoriasAvaliador.indexOf(cat) == -1)
+                categoriasDisponiveis.add(cat);
+        }
+    }
+
+    
 
     @RequestMapping(value = { "/inserir-categoria-cadastro" }, method = RequestMethod.GET)
     public ModelAndView categoriasAvaliadorCadastro(@RequestParam("id") Long id) {
@@ -84,7 +125,9 @@ public class AvaliadorController {
         Avaliador avaliador = avaliadorRepository.getOne(id);
         ModelAndView mv = new ModelAndView();
         mv.addObject("avaliador", avaliador);
-        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Categoria> categoriasAvaliador = new ArrayList<Categoria>();
+        List<Categoria> categorias = new ArrayList<Categoria>();
+        populaListasDeCategoriasDeAvaliador(id, categoriasAvaliador,categorias);
         mv.addObject("categorias", categorias);
         mv.addObject("categoriasAvaliador", avaliador.getCategorias());
         mv.setViewName("inserir-categoria-avaliador.html");
