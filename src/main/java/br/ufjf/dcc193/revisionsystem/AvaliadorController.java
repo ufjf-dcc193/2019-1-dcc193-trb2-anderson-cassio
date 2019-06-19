@@ -164,7 +164,7 @@ public class AvaliadorController {
         Avaliador avaliador = avaliadorRepository.getOne(id);
         ModelAndView mv = new ModelAndView();
         mv.addObject("avaliador", avaliador);
-        mv.setViewName("editar-avaliador.html");
+        mv.setViewName("criar-avaliador.html");
         return mv;
 
 }
