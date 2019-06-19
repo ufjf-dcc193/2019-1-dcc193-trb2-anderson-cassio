@@ -3,6 +3,7 @@ package br.ufjf.dcc193.revisionsystem;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,6 @@ public class AvaliadorController {
 
     @Autowired
     CategoriaRepository categoriaRepository;
-
-    @RequestMapping({ "", "/", "/index.html" })
-    public ModelAndView AvaliadorIndex() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("atividade-index");
-        mv.addObject("nome", "Fulano");
-        return mv;
-    }
 
     @RequestMapping(value = { "/categorias-avaliador" }, method = RequestMethod.GET)
     public ModelAndView categoriasAvaliador(@RequestParam("id") Long id) {
@@ -119,7 +112,7 @@ public class AvaliadorController {
     }
 
     @PostMapping(value = "/cadastrar-plataforma.html")
-    public ModelAndView cadastrarPlataforma(@Valid Avaliador avaliador, BindingResult binding) {
+    public ModelAndView cadastrarPlataforma(@Valid Avaliador avaliador, BindingResult binding, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         if (binding.hasErrors()) {
             mv.setViewName("criar-avaliador");
@@ -127,9 +120,8 @@ public class AvaliadorController {
             return mv;
         }
         avaliadorRepository.save(avaliador);
-        avaliador = avaliadorRepository.findByEmail(avaliador.getEmail());
-        mv.setViewName("listar-avaliador.html");
-        mv.addObject("avaliadores", avaliador);
+        session.setAttribute("loggedUser", avaliador);
+        mv.setViewName("index.html");
         return mv;
     }
 
