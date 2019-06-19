@@ -88,7 +88,7 @@ public class TrabalhoController {
             public int compare(Trabalho  trabalho1, Trabalho  trabalho2)
             {
     
-                return  trabalho1.getRevisoesCount().compareTo(trabalho2.getRevisoesCount());
+                return  trabalho1.getRevisoesAvaliadasCount().compareTo(trabalho2.getRevisoesAvaliadasCount());
             }
         });
 

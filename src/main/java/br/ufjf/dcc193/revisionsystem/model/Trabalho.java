@@ -122,8 +122,13 @@ public class Trabalho {
     }
 
 
-    public Integer getRevisoesCount(){
-        return (Integer)this.revisoes.size();
+    public Integer getRevisoesAvaliadasCount(){
+        Integer i = 0;
+        for (Revisao revisao : this.revisoes) {
+            if (revisao.getStatus()==Status.AVALIADO)
+                i++;
+        }
+        return i++;
     }
     
 
