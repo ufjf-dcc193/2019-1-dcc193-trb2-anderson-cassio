@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Atividade: Nova</title>
 </head>
+
 <body>
     <form th:action="@{criar.html}" method="post" th:object="${atividade}">
         <label>Título: <input type="text" th:field="*{titulo}"></label>
@@ -15,4 +17,6 @@
     </form>
     
 </body>
+
+<div th:replace="_shared/scripts :: scripts"></div>
 </html>

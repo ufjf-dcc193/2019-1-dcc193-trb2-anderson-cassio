@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
@@ -9,50 +8,50 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Listar trabalhos</title>
+  <meta charset="UTF-8">
+  <title>Listar trabalhos</title>
 </head>
 
 
 
 <body>
-    <nav th:replace="_shared/menu :: menu"></nav>
-  
-     
-  
-        <div class="album py-5 bg-light">
-          <div class="container">
-  
-                <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Título</th>
-                                <th>Descrição</th>
-                                <th>Url</th>
-                                <th>Editar</th>
-                                <th>Deletar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
-                                    <td th:text="*{id}"></td>
-                                    <td th:text="*{titulo}"></td>
-                                    <td th:text="*{descricao}"></td>
-                              
-                                    <td><a th:href="@{/trabalhos/editar(id=${trabalho.id})}">
-                                      <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
-                                  </a></td>
-                                  <td><a th:href="@{/trabalhos/deletar(id=${trabalho.id})}">
-                                      <i class="fa fa-times" aria-hidden="true">Deletar</i>
-                                  </a></td>
-              
-                                </tr>
-                            </tbody>
-                    </table>
-              </div>
+  <nav th:replace="_shared/menu :: menu"></nav>
+
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Url</th>
+            <th>Editar</th>
+            <th>Deletar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="trabalho: ${trabalhos}" th:object="${trabalho}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{titulo}"></td>
+            <td th:text="*{descricao}"></td>
+
+            <td><a th:href="@{/trabalhos/editar(id=${trabalho.id})}">
+                <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
+              </a></td>
+            <td><a th:href="@{/trabalhos/deletar(id=${trabalho.id})}">
+                <i class="fa fa-times" aria-hidden="true">Deletar</i>
+              </a></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  
+
   <div th:replace="_shared/scripts :: scripts"></div>
 </body>
 

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
@@ -9,24 +8,24 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Atividade: Nova</title>
+  <meta charset="UTF-8">
+  <title>Atividade: Nova</title>
 </head>
 
 <body>
-    <nav th:replace="_shared/menu :: menu"></nav>
+  <nav th:replace="_shared/menu :: menu"></nav>
 
-  
+
   <div class="album py-5 bg-light">
-        <div class="container">
+    <div class="container">
 
 
 
-        <form th:action="@{criar-avaliador.html}" method="post" th:object="${avaliador}">
-            <div class="form-group">
+      <form th:action="@{criar-avaliador.html}" method="post" th:object="${avaliador}">
+        <div class="form-group">
 
-            <label>Nome: <input type="text" class="form-control" th:field="*{nome}"></label>
-            <strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
+          <label>Nome: <input type="text" class="form-control" th:field="*{nome}"></label>
+          <strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong>
 
         </div>
         <div class="form-group">
@@ -53,7 +52,5 @@
 </div>
 
 
-<div th:replace="_shared/scripts :: scripts">
+<div th:replace="_shared/scripts :: scripts"></div>
 </body>
-
-

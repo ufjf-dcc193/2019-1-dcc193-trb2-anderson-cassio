@@ -14,34 +14,37 @@
 </head>
 
 <body>
-    <nav th:replace="_shared/menu :: menu"></nav>
+  <nav th:replace="_shared/menu :: menu"></nav>
+
   <body>
 
-     
-  
-      <main role="main">
-  
-        <section class="jumbotron text-center">
-          <div class="container">
-            <h1 class="jumbotron-heading">Sistema de Revisão</h1>
-            <p class="lead text-muted">Seja bem-vindo ao sistema de revisão de trabalhos, essa trabalho foi desenvolvido para disciplina de Laboratório Web II, ministrada pelo professor Igor Knop, desenvolvido pelos alunos Cássio Reis e Jônatas André.</p>
-            <p>
-              <a href="/../avaliador/cadastrar" class="btn btn-primary my-2">Cadastrar na plataforma</a>
-              <a href="/../avaliador/login.html" class="btn btn-secondary my-2">Fazer Login</a>
-            </p>
-          </div>
-        </section>
-  
- 
-  
-  
-      </main>
-  
-  
-  
-  
-  
-      <div th:replace="_shared/scripts :: scripts">
-</body>
+
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Sistema de Revisão</h1>
+          <p class="lead text-muted">Seja bem-vindo ao sistema de revisão de trabalhos, essa trabalho foi desenvolvido
+            para disciplina de Laboratório Web II, ministrada pelo professor Igor Knop, desenvolvido pelos alunos Cássio
+            Reis e Jônatas André.</p>
+          <p>
+            <a href="/../avaliador/cadastrar" class="btn btn-primary my-2">Cadastrar na plataforma</a>
+            <a href="/../avaliador/login.html" class="btn btn-secondary my-2">Fazer Login</a>
+          </p>
+        </div>
+      </section>
+
+
+
+
+    </main>
+
+
+
+
+
+    <div th:replace="_shared/scripts :: scripts"></div>
+  </body>
 
 </html>
