@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.revisionsystem.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -123,6 +124,15 @@ public class Avaliador {
 
     public void setRevisoes(Set<Revisao> revisoes) {
         this.revisoes = revisoes;
+    }
+
+    public List<Revisao> getRevisoesAvaliadas(){
+        List<Revisao> revisoesAvaliadas = new ArrayList<Revisao>();
+        for (Revisao r : this.revisoes) {
+            if (r.getStatus()==Status.AVALIADO)
+                revisoesAvaliadas.add(r);
+        }
+        return revisoesAvaliadas;
     }
 
     

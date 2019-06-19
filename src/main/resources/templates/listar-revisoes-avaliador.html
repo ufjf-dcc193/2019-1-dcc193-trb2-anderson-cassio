@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <em th:replace="_shared/style :: style"></em>
+  <title>Listar revisões</title>
+</head>
+
+
+
+<body>
+  <nav th:replace="_shared/menu :: menu"></nav>
+
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nota</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Trabalho</th>
+            <th>Editar status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="revisao: ${revisoes}" th:object="${revisao}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{nota}"></td>
+            <td th:text="*{descricao}"></td>
+            <td th:text="*{status}"></td>
+            <td th:text="*{trabalho.getTitulo()}"></td>
+
+            <td><a th:href="@{/revisao/detalhe-revisao(id=${revisao.id})}">
+                <i class="fa fa-pencil" aria-hidden="true"> Editar</i>
+              </a></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div th:replace="_shared/scripts :: scripts"></div>
+</body>
+
+
+</html>

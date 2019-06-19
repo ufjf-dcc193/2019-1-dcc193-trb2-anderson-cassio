@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.revisionsystem;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -94,5 +95,55 @@ public class RevisaoController {
         mv.setViewName("redirect:/trabalhos/listar-trabalhos-categoria");
         return mv;
     }
+
+
+    
+    @RequestMapping("/listar-revisoes-avaliador")
+    public ModelAndView ListarAvaliacoes(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        
+        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+
+        List<Revisao> revisoes = avaliador.getRevisoesAvaliadas();
+        mv.addObject("revisoes", revisoes);
+        mv.setViewName("listar-revisoes-avaliador");
+        return mv;
+    }
+
+    @RequestMapping("/detalhe-revisao")
+    public ModelAndView DetalheAvaliacao (@RequestParam("id") Long id, HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        
+        Revisao revisao = revisaoRepository.getOne(id);
+
+        mv.addObject("revisao", revisao);
+        mv.addObject("tituloTrabalho", revisao.getTrabalho().getTitulo());
+        List<Status> statusEnum = new ArrayList<>();
+        statusEnum.add(Status.AVALIADO);
+        statusEnum.add(Status.VALIDADO);
+        statusEnum.add(Status.INVALIDADO);
+        mv.addObject("statusEnum", statusEnum);
+        mv.setViewName("detalhe-revisao");
+        return mv;
+    }
+    
+    @RequestMapping("/editar-revisao.html")
+    public ModelAndView EditarAvaliacao(Revisao revisao, int statusEnum, HttpSession session){
+        ModelAndView mv = new ModelAndView();
+
+        Revisao current = revisaoRepository.getOne(revisao.getId());
+        current.setStatus(Status.getStatusByValue(statusEnum));
+        revisaoRepository.save(current);
+        
+        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+
+        List<Revisao> revisoes = avaliador.getRevisoesAvaliadas();
+        mv.addObject("revisoes", revisoes);
+        mv.setViewName("listar-revisoes-avaliador");
+        return mv;
+    }
+    
 
 }
