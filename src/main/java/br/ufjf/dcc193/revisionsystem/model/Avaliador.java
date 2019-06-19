@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Avaliador {
@@ -18,8 +19,11 @@ public class Avaliador {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotBlank(message="Nome obrigatório")
     private String nome;
+    @NotBlank(message="E-mail obrigatório")
     private String email;
+    @NotBlank(message="Senha obrigatória")
     private String password;
 
     @ManyToMany

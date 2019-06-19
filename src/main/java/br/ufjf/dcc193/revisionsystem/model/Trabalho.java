@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Trabalho {
@@ -18,12 +20,14 @@ public class Trabalho {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotBlank(message="Título obrigatório")
     private String titulo;
     private String descricao;
     private String url;
 
     @ManyToOne
     @JoinColumn
+    @NotNull(message="Categoria obrigatória")
     private Categoria trabalhoAreaDeConhecimento;
 
     @OneToMany(mappedBy = "trabalho", cascade = CascadeType.ALL)

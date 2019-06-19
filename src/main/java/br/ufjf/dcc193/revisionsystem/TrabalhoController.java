@@ -50,7 +50,7 @@ public class TrabalhoController {
 
     @PostMapping(value = "/criar-trabalho.html")
     public ModelAndView criar(@Valid Trabalho trabalho, BindingResult binding,
-            @RequestParam("trabalhoAreaDeConhecimento") Long id_cat) {
+            Long id_cat) {
         ModelAndView mv = new ModelAndView();
         if (binding.hasErrors()) {
             mv.setViewName("criar-trabalho");
