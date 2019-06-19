@@ -117,6 +117,10 @@ public class Trabalho {
         this.revisoes = revisoes;
     }
 
+    public void addRevisao(Revisao revisao){
+        this.revisoes.add(revisao);
+    }
+
 
     public Integer getRevisoesCount(){
         return (Integer)this.revisoes.size();

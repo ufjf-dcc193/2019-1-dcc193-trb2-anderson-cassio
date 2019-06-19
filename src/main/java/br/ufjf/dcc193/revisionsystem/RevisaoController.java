@@ -48,6 +48,7 @@ public class RevisaoController {
         Trabalho trabalho = trabalhoRepository.getOne(id);
         Set<Revisao> revisoes = trabalho.getRevisoes();
         Revisao revisao = new Revisao();
+        revisao.setStatus(Status.A_FAZER);
         for (Revisao r : revisoes) {
             if (r.getAvaliador().equals(avaliador)){
                 revisao = r;
@@ -63,9 +64,32 @@ public class RevisaoController {
     }
 
     @RequestMapping("/revisar-trabalho.html")
-    public ModelAndView RevisarTrabalho(@Valid Revisao revisao, Long idTrabalho, String tipoAvaliacao) {
+    public ModelAndView RevisarTrabalho(@Valid Revisao revisao, Long idTrabalho, String tipoAvaliacao,HttpSession session){
         ModelAndView mv = new ModelAndView();
         Trabalho trabalho = trabalhoRepository.getOne(idTrabalho);
+        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
+        Avaliador avaliador = avaliadorRepository.getOne(user.getId());
+        
+        switch (tipoAvaliacao){
+            case "agora": 
+                revisao.setStatus(Status.AVALIADO);
+                break;
+            case "depois": 
+                revisao.setStatus(Status.A_FAZER);
+                break;
+            case "pular": 
+                revisao.setStatus(Status.IMPEDIDO);
+                revisao.setNota(0);
+                revisao.setDescricao("");
+                break;
+        }
+        revisao.setTrabalho(trabalho);
+        revisao.setAvaliador(avaliador);
+        boolean isNewRevision = revisao.getId() == null;
+        revisaoRepository.save(revisao);
+        if (isNewRevision)
+            trabalho.addRevisao(revisao);
+        trabalhoRepository.save(trabalho);
         mv.addObject("id", trabalho.getTrabalhoAreaDeConhecimento().getId());
         mv.setViewName("redirect:/trabalhos/listar-trabalhos-categoria");
         return mv;
