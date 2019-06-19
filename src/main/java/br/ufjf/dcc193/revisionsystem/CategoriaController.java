@@ -17,12 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import br.ufjf.dcc193.revisionsystem.model.Categoria;
 import br.ufjf.dcc193.revisionsystem.repository.CategoriaRepository;
 
-
 @Controller
 @RequestMapping("/categorias")
 public class CategoriaController {
-    
-    
+
     @Autowired
     CategoriaRepository categoriaRepository;
 
@@ -34,33 +32,30 @@ public class CategoriaController {
         return mv;
     }
 
-    
-
-    
     @RequestMapping("/criar")
-    public ModelAndView nova(){
-            Categoria categoria = new Categoria();
-            ModelAndView mv = new ModelAndView();
-            mv.setViewName("criar-categoria.html");
+    public ModelAndView nova() {
+        Categoria categoria = new Categoria();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("criar-categoria.html");
+        mv.addObject("categoria", categoria);
+        return mv;
+    }
+
+    @PostMapping(value = "/criar-categoria.html")
+    public ModelAndView criar(@Valid Categoria categoria, BindingResult binding) {
+        ModelAndView mv = new ModelAndView();
+        if (binding.hasErrors()) {
+            mv.setViewName("criar-categoria");
             mv.addObject("categoria", categoria);
             return mv;
+        }
+        categoriaRepository.save(categoria);
+        mv.setViewName("redirect:/categorias/listar-categorias.html");
+        return mv;
     }
 
-    @PostMapping(value="/criar-categoria.html")
-    public ModelAndView criar(@Valid Categoria categoria, BindingResult binding){
-            ModelAndView mv = new ModelAndView();
-            if(binding.hasErrors()){
-                mv.setViewName("criar-categoria");
-                mv.addObject("categoria", categoria);
-                return mv;
-            }
-            categoriaRepository.save(categoria);
-            mv.setViewName("redirect:/categorias/listar-categorias.html");
-            return mv;
-    }
-
-    @GetMapping(value="/listar-categorias.html")
-    public ModelAndView listar(){
+    @GetMapping(value = "/listar-categorias.html")
+    public ModelAndView listar() {
         List<Categoria> categorias = categoriaRepository.findAll();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("listar-categorias.html");
@@ -68,31 +63,30 @@ public class CategoriaController {
         return mv;
     }
 
-
     @RequestMapping(value = { "/editar" }, method = RequestMethod.GET)
     public ModelAndView editar(@RequestParam("id") Long id) {
         Categoria categoria = categoriaRepository.getOne(id);
         ModelAndView mv = new ModelAndView();
         mv.addObject("categoria", categoria);
-        mv.setViewName("editar-categoria.html");
+        mv.setViewName("criar-categoria.html");
         return mv;
 
-}
+    }
 
-  
-@RequestMapping(value = { "/deletar" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/deletar" }, method = RequestMethod.GET)
     public ModelAndView deletar(@RequestParam("id") Long id) {
         categoriaRepository.deleteById(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("redirect:/categorias/listar-categorias.html");
         return mv;
 
-}
+    }
 
-@PostMapping(value="/editar-categoria.html")
-public ModelAndView editar(@RequestParam(value = "id", required = true) Long id ,@Valid Categoria categoria, BindingResult binding){
+    @PostMapping(value = "/editar-categoria.html")
+    public ModelAndView editar(@RequestParam(value = "id", required = true) Long id, @Valid Categoria categoria,
+            BindingResult binding) {
         ModelAndView mv = new ModelAndView();
-        if(binding.hasErrors()){
+        if (binding.hasErrors()) {
             mv.setViewName("criar-categoria");
             mv.addObject("categoria", categoria);
             return mv;
@@ -101,6 +95,6 @@ public ModelAndView editar(@RequestParam(value = "id", required = true) Long id 
         categoriaRepository.save(categoria);
         mv.setViewName("redirect:/trabalhos/listar-categorias.html");
         return mv;
-}
+    }
 
 }

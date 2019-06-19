@@ -19,6 +19,7 @@
 
 
       <form th:action="@{criar-categoria.html}" method="post" th:object="${categoria}">
+        <input type="hidden" class="form-control" th:field="*{id}">
         <div class="form-group">
 
           <label>Titulo: <input type="text" class="form-control" th:field="*{nome}"></label>
