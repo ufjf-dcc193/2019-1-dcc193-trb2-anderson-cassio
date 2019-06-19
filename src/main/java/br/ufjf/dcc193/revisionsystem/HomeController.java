@@ -25,8 +25,16 @@ public class HomeController {
     @RequestMapping({ "", "/", "/index.html" })
     public ModelAndView index(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        if (session.getAttribute("loggedUser") !=null)
+        Avaliador user = (Avaliador)session.getAttribute("loggedUser");
+        if (user !=null){
             mv.setViewName("index");
+
+            Long userId = user.getId();
+            if (userId == null)
+                mv.addObject("useridNulo", "useridNulo");
+            else
+                mv.addObject("useridNulo", "useridNãoNulo");
+        }
         else
             mv.setViewName("index-nologged");
         return mv;
