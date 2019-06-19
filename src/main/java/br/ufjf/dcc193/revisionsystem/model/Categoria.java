@@ -61,4 +61,22 @@ public class Categoria {
     public Long getId() {
         return id;
     }
+
+    public Set<Avaliador> getAvaliadores() {
+        return avaliadores;
+    }
+
+    public void setAvaliadores(Set<Avaliador> avaliadores) {
+        this.avaliadores = avaliadores;
+    }
+
+    public Set<Trabalho> getTrabalhos() {
+        return trabalhos;
+    }
+
+    public void setTrabalhos(Set<Trabalho> trabalhos) {
+        this.trabalhos = trabalhos;
+    }
+
+    
 }

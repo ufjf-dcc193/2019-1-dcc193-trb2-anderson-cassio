@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <em th:replace="_shared/style :: style"></em>
+  <title>Atividade: Nova</title>
+</head>
+
+<body>
+  <nav th:replace="_shared/menu :: menu"></nav>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <h6> Áreas em que posso atuar </h6>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoria</th>
+            <th>Listar trabalhos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="categoria: ${categorias}" th:object="${categoria}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{nome}"></td>
+            <td><a
+                th:href="@{'/../trabalhos/listar-trabalhos-categoria?id=' + ${categoria.id}}">
+                <i class="fa fa-plus" aria-hidden="true"> Listar</i>
+              </a></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div th:replace="_shared/scripts :: scripts"></div>
+</body>

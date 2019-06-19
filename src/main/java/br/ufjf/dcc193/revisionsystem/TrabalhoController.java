@@ -1,6 +1,10 @@
 package br.ufjf.dcc193.revisionsystem;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -57,7 +61,7 @@ public class TrabalhoController {
             mv.addObject("trabalho", trabalho);
             return mv;
         }
-        trabalho.setTrabalhoAreaDeConhecimento(categoriaRepository.getOne(id_cat));
+        //trabalho.setTrabalhoAreaDeConhecimento(categoriaRepository.getOne(id_cat));
         trabalhoRepository.save(trabalho);
         mv.setViewName("redirect:/trabalhos/listar-trabalhos.html");
         return mv;
@@ -71,6 +75,30 @@ public class TrabalhoController {
         mv.addObject("trabalhos", trabalhos);
         return mv;
     }
+
+    @GetMapping(value = "/listar-trabalhos-categoria")
+    public ModelAndView listarTrabalhosCategoria(@RequestParam("id") Long id) {
+        Categoria categoria = categoriaRepository.getOne(id);
+        List<Trabalho> trabalhos = new ArrayList<>(categoria.getTrabalhos());
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("listar-trabalhos.html");
+
+        Collections.sort(trabalhos, new Comparator<Trabalho>() {
+            @Override
+            public int compare(Trabalho  trabalho1, Trabalho  trabalho2)
+            {
+    
+                return  trabalho1.getRevisoesCount().compareTo(trabalho2.getRevisoesCount());
+            }
+        });
+
+
+
+        mv.addObject("trabalhos", trabalhos);
+        return mv;
+    }
+
+    
 
     @RequestMapping(value = { "/editar" }, method = RequestMethod.GET)
     public ModelAndView editar(@RequestParam("id") Long id) {

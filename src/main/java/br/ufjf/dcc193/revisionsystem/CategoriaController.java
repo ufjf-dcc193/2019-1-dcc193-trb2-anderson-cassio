@@ -2,6 +2,7 @@ package br.ufjf.dcc193.revisionsystem;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufjf.dcc193.revisionsystem.model.Avaliador;
 import br.ufjf.dcc193.revisionsystem.model.Categoria;
+import br.ufjf.dcc193.revisionsystem.repository.AvaliadorRepository;
 import br.ufjf.dcc193.revisionsystem.repository.CategoriaRepository;
 
 @Controller
@@ -23,6 +26,9 @@ public class CategoriaController {
 
     @Autowired
     CategoriaRepository categoriaRepository;
+
+    @Autowired
+    AvaliadorRepository avaliadorRepository;
 
     @RequestMapping({ "", "/", "/index.html" })
     public ModelAndView CategoriaIndex() {
@@ -62,6 +68,23 @@ public class CategoriaController {
         mv.addObject("categorias", categorias);
         return mv;
     }
+
+    @GetMapping(value = "/listar-categorias-avaliador")
+    public ModelAndView listarCategoriasAvaliador(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        Avaliador usuario = (Avaliador)session.getAttribute("loggedUser");
+        if (usuario == null){
+            mv.setViewName("login.html");
+            return mv;
+        }
+        Avaliador avaliador = avaliadorRepository.getOne(usuario.getId());
+        List<Categoria> categorias = avaliador.getCategorias();
+        mv.setViewName("listar-categorias-avaliador.html");
+        mv.addObject("categorias", categorias);
+        return mv;
+    }
+
+    
 
     @RequestMapping(value = { "/editar" }, method = RequestMethod.GET)
     public ModelAndView editar(@RequestParam("id") Long id) {

@@ -42,7 +42,6 @@ public class Trabalho {
         this.descricao = descricao;
         this.url = url;
     }
-
     /**
      * @return the titulo
      */
@@ -109,5 +108,19 @@ public class Trabalho {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public Set<Revisao> getRevisoes() {
+        return revisoes;
+    }
+
+    public void setRevisoes(Set<Revisao> revisoes) {
+        this.revisoes = revisoes;
+    }
+
+
+    public Integer getRevisoesCount(){
+        return (Integer)this.revisoes.size();
+    }
+    
 
 }
