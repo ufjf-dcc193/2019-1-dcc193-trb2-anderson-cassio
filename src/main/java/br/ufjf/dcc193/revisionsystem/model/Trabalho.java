@@ -1,14 +1,16 @@
 package br.ufjf.dcc193.revisionsystem.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -25,6 +27,11 @@ public class Trabalho {
     @ManyToOne
     @JoinColumn
     private Categoria trabalhoAreaDeConhecimento;
+  
+
+    @OneToMany(mappedBy = "trabalho", cascade = CascadeType.ALL)
+    private Set<Trabalho> revisoes;
+
 
     public Trabalho() {
 

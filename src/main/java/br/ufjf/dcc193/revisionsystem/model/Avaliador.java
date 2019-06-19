@@ -1,13 +1,16 @@
 package br.ufjf.dcc193.revisionsystem.model;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 
@@ -26,6 +29,9 @@ public class Avaliador {
     @JoinTable(
     name = "categorias")
     private List<Categoria> categorias;
+
+    @OneToMany(mappedBy = "avaliador", cascade = CascadeType.ALL)
+    private Set<Revisao> revisoes;
 
  
     /**
